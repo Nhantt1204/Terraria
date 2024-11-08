@@ -21,16 +21,23 @@ jobs:
         mkdir -p terraria-server
         cd terraria-server
         wget https://terraria.org/api/download/pc-dedicated-server/terraria-server-1436.zip -O terraria-server.zip
-        ls -lh terraria-server.zip
+        ls -lh terraria-server.zip  # Kiểm tra file zip đã tải về
 
     - name: Unzip Terraria Server
       run: |
         cd terraria-server
         unzip terraria-server.zip
-        ls -R  # Kiểm tra cấu trúc file và thư mục sau khi giải nén
+        ls -R  # Liệt kê các thư mục và file sau khi giải nén
+
+    - name: Verify TerrariaServer file
+      run: |
+        cd terraria-server/Linux
+        ls -lh  # Kiểm tra file TerrariaServer có ở đó không
 
     - name: Set executable permissions with sudo
-      run: sudo chmod +x terraria-server/Linux/TerrariaServer.bin.x86_64
+      run: |
+        sudo chmod +x terraria-server/Linux/TerrariaServer.bin.x86_64
+        ls -lh terraria-server/Linux  # Kiểm tra lại quyền sau khi set
 
     - name: Start Terraria Server
       run: |
