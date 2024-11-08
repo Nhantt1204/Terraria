@@ -1,1 +1,22 @@
+name: Terraria Server
 
+on:
+  workflow_dispatch:
+
+jobs:
+  terraria:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v2
+
+    - name: Install Terraria Server
+      run: |
+        wget https://terraria.org/server/terraria-server-1436.zip -O terraria-server.zip
+        unzip terraria-server.zip -d terraria-server
+        chmod +x terraria-server/Linux/TerrariaServer.bin.x86_64
+
+    - name: Start Terraria Server
+      run: |
+        terraria-server/Linux/TerrariaServer.bin.x86_64 -config serverconfig.txt
