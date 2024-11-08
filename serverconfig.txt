@@ -3,3 +3,6 @@ worldname=myworld
 port=7777
 maxplayers=10
 password=6426
+
+- name: Verify serverconfig.txt
+  run: cat serverconfig.txt
