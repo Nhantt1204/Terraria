@@ -1,0 +1,5 @@
+worldpath=worlds/
+worldname=myworld
+port=7777
+maxplayers=10
+password=6426
