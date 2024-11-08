@@ -27,17 +27,22 @@ jobs:
       run: |
         cd terraria-server
         unzip terraria-server.zip
-        ls -R  # Liệt kê các thư mục và file sau khi giải nén
+        ls -R  # Liệt kê tất cả thư mục và file sau khi giải nén để kiểm tra vị trí file thực thi
 
-    - name: Find TerrariaServer file
+    - name: Check directory structure after unzip
+      run: |
+        cd terraria-server
+        ls -R  # Kiểm tra cấu trúc thư mục của Terraria server sau khi giải nén
+
+    - name: Find the TerrariaServer file
       run: |
         find terraria-server -name "TerrariaServer.bin.x86_64"  # Tìm vị trí chính xác của file thực thi
 
     - name: Set executable permissions
       run: |
-        sudo chmod +x terraria-server/Linux/TerrariaServer.bin.x86_64  # Thay đổi đường dẫn nếu cần
+        sudo chmod +x $(find terraria-server -name "TerrariaServer.bin.x86_64")  # Cấp quyền thực thi cho file tìm được
 
     - name: Start Terraria Server
       run: |
-        cd terraria-server/Linux
+        cd $(dirname $(find terraria-server -name "TerrariaServer.bin.x86_64"))  # Di chuyển vào thư mục chứa file thực thi
         ./TerrariaServer.bin.x86_64 -config ../../serverconfig.txt
